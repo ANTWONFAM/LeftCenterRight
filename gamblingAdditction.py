@@ -80,8 +80,8 @@ turns = turnRaw.keys()
 distribution = turnRaw.values()
 
 
-print len(turns)
-print len(distribution)
+print (len(turns))
+print (len(distribution))
 
 plt.scatter(turns,distribution,)
 plt.xlabel('Number of Total Turns')
