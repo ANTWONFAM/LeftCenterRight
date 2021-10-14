@@ -4,9 +4,6 @@ import math
 import collections
 from matplotlib import pyplot as plt
 
-# record full game transcript
-# check recursion
-# github
 
 class game:
     actions = {0:'c',1:'c',2:'c',3:'s',4:'l',5:'r'}
@@ -72,7 +69,7 @@ class game:
 turnRaw = []
 distribution = []
 
-for i in range(400000):
+for i in range(40000):
     turnRaw.append(game(4,1).runGame()[0])
 
 turnRaw = collections.Counter(turnRaw)
