@@ -10,6 +10,7 @@ class game:
     turnCount = 0
     centerPoints = 0
     playerTurn = 0
+    winner = None
 
     # default initiation, comes with player number and start points on each player
     def __init__(self, playerNo, startPoints):
@@ -34,6 +35,7 @@ class game:
         for x in self.board:
             if x != 0:
                 temp += 1
+                self.winner = self.board.index(x)
             if temp > 1:
                 return False
         return True
@@ -60,7 +62,7 @@ class game:
                     self.board[self.playerTurn + 1] += 1
                 except IndexError:
                     self.board[0] += 1
-        if self.playerTurn == len(self.board)-1:
+        if self.playerTurn == len(self.board) - 1:
             self.playerTurn = 0
         else:
             self.playerTurn += 1
@@ -91,12 +93,17 @@ class game:
                         self.board[0] += 1
 
     # actually runs the game, checks gameEnd state in the beginning, returns the list below
-    def runGame(self):
+    def runGameWithTracking(self):
         print(self.board)
         while not self.gameEnd():
             self.round()
             print(self.board)
-        return [self.turnCount, self.centerPoints, self.board]
+        return [self.turnCount, self.centerPoints, self.board, self.winner]
+
+    def runGame(self):
+        while not self.gameEnd():
+            self.round()
+        return [self.turnCount, self.centerPoints, self.board, self.winner]
 
 
 if __name__ == "__main__":
