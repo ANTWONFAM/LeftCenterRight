@@ -50,6 +50,7 @@ class game:
             diceCount = self.board[self.playerTurn]
         for i in range(diceCount):
             temp = self.roll()  # temp var to store roll
+            # print(temp)
             if temp == 'c':  # "circle"
                 None
             elif temp == 's':  # "star"
@@ -88,7 +89,7 @@ if __name__ == "__main__":
     turnRaw = []
     distribution = []
 
-    for i in range(40000):
+    for i in range(100000):
         turnRaw.append(game(4, 1).runGame()[0])
 
     turnRaw = collections.Counter(turnRaw)
