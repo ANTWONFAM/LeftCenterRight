@@ -21,8 +21,11 @@ class game:
             self.board.append(startPoints)
 
     # customize the game state, if you wanted a 4p 1v1 situation you can set gameBoard = [1,1,0,0] or [0,2,1,0] etc.
-    def gameState(self, gameBoard):
+    def setGameState(self, gameBoard):
         self.board = gameBoard
+
+    def returnGameState(self):
+        return self.board
 
     # roll dice, returns an action in the form of a single letter string, see dictionary "actions" above
     def roll(self):
@@ -47,7 +50,6 @@ class game:
             diceCount = self.board[self.playerTurn]
         for i in range(diceCount):
             temp = self.roll()  # temp var to store roll
-            self.turnCount += 1
             if temp == 'c':  # "circle"
                 None
             elif temp == 's':  # "star"
@@ -66,43 +68,18 @@ class game:
             self.playerTurn = 0
         else:
             self.playerTurn += 1
-        print(self.board)
-
-    # modifies the gameBoard such that each player rolls once, you might want to organize this to have multiple rolls
-    def round(self):
-        for i in range(len(self.board)):  # iteration across the indexes of the board
-            self.turnCount += 1
-            diceCount = 3
-            if self.board[i] < 4:
-                diceCount = self.board[i]
-            for j in range(diceCount):
-                temp = self.roll()  # temp var to store roll
-                if temp == 'c':  # "circle"
-                    None
-                elif temp == 's':  # "star"
-                    self.board[i] -= 1
-                    self.centerPoints += 1
-                elif temp == 'l':  # "left"
-                    self.board[i] -= 1
-                    self.board[i - 1] += 1
-                elif temp == 'r':  # "right"
-                    self.board[i] -= 1
-                    try:
-                        self.board[i + 1] += 1
-                    except IndexError:
-                        self.board[0] += 1
 
     # actually runs the game, checks gameEnd state in the beginning, returns the list below
     def runGameWithTracking(self):
         print(self.board)
         while not self.gameEnd():
-            self.round()
+            self.turn()
             print(self.board)
         return [self.turnCount, self.centerPoints, self.board, self.winner]
 
     def runGame(self):
         while not self.gameEnd():
-            self.round()
+            self.turn()
         return [self.turnCount, self.centerPoints, self.board, self.winner]
 
 
