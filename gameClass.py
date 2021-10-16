@@ -89,7 +89,7 @@ if __name__ == "__main__":
     turnRaw = []
     distribution = []
 
-    for i in range(100000):
+    for i in range(10000):
         turnRaw.append(game(4, 1).runGame()[0])
 
     turnRaw = collections.Counter(turnRaw)

@@ -1,33 +1,39 @@
 import gameClass
 from matplotlib import pyplot as plt
 import copy
+import collections
 
-playerCount = 7
-tokenCount = 5
+playerCount = 100
+tokenCount = 1
 
-winnerDistribution = [0] * playerCount
-lengthDistribution = [0] * 1000
-for i in range(50000):
+rawLen = []
+rawWin = []
+gameNumber = 50000
+
+
+for i in range(gameNumber):
     tempGame = gameClass.game(playerCount, tokenCount)
     # tempGame.setGameState([1, 1, 1])  # overrides the values above
     tempData = tempGame.runGame()
-    winnerDistribution[tempData[3]] += 1
-    lengthDistribution[tempData[0]] += 1
+    rawWin.append(tempData[3])
+    rawLen.append(tempData[0])
+
+rawLen = collections.Counter(rawLen)
+rawWin = collections.Counter(rawWin)
+
+print (rawWin)
+
+plt.scatter(rawLen.keys(),rawLen.values())
+plt.xlabel('Number of Turns')
+plt.ylabel('Amount of Games')
+plt.show()
 
 
-print(winnerDistribution)
-print(lengthDistribution)
-#
-# xAxis = []
-# for x in range(1000):
-#     xAxis.append(x+1)
-#
-# templist = copy.deepcopy(lengthDistribution)
-#
-# for i in range(len(lengthDistribution)):
-#     if lengthDistribution[i] == 0:
-#         xAxis.pop(i)
-#
-# lengthDistribution.remove(0)
-# plt.scatter(xAxis,lengthDistribution)
-# plt.show()
+winPercent = []
+for i in rawWin.keys():
+    winPercent.append(rawWin[i]*100/gameNumber)
+
+plt.scatter(rawWin.keys(), winPercent)
+plt.ylabel('Win Percent')
+plt.xlabel('Player #')
+plt.show()
