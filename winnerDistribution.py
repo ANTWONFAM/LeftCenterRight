@@ -1,41 +1,45 @@
-import numpy
-
 import gameClass
 from matplotlib import pyplot as plt
-import copy
 import collections
 
-playerCount = 50
+playerCount = 5
 tokenCount = 1
+gameNumber = 100000
 
-rawLen = []
-rawWin = []
-gameNumber = 10000
+def winnerDist():
+    rawLen = []
+    rawWin = []
+    for i in range(gameNumber):
+        tempGame = gameClass.game(playerCount, tokenCount)
+        # tempGame.setGameState([1, 1, 1])  # overrides the values above
+        tempData = tempGame.runGame()
+        rawWin.append(tempData[3])
+        rawLen.append(tempData[0])
 
-for i in range(gameNumber):
-    tempGame = gameClass.game(playerCount, tokenCount)
-    # tempGame.setGameState([1, 1, 1])  # overrides the values above
-    tempData = tempGame.runGame()
-    rawWin.append(tempData[3])
-    rawLen.append(tempData[0])
+    rawLen = collections.Counter(rawLen)
+    rawWin = collections.Counter(rawWin)
+    print (rawWin)
+    return [list(rawLen.keys()),list(rawLen.values()),list(rawWin.keys()),list(rawWin.values()),rawLen,rawWin]
 
-rawLen = collections.Counter(rawLen)
-rawWin = collections.Counter(rawWin)
 
-print(rawWin)
 
-plt.scatter(rawLen.keys(), rawLen.values(), marker='.')
-plt.xlabel('Number of Turns')
-plt.ylabel('Amount of Games')
-plt.show()
 
-winPercent = []
-for i in rawWin.keys():
-    winPercent.append(rawWin[i] * 100 / gameNumber)
+if __name__ == '__main__':
+    lenX, lenY, winX, winY, _, _ = winnerDist()
+    plt.scatter(lenX, lenY, marker='.')
+    plt.xlabel('Number of Turns')
+    plt.ylabel('Amount of Games')
+    plt.show()
 
-plt.scatter(rawWin.keys(), winPercent, marker='.')
-m, b = numpy.polyfit(rawWin.keys(), winPercent, 1)
-plt.plot(rawWin.keys(), m*rawWin.keys() + b)
-plt.ylabel('Win Percent')
-plt.xlabel('Player #')
-plt.show()
+    print(type(lenX),type(lenY),type(winX),type(winY))
+    print(winX)
+    print(winY)
+    winPercent = []
+    for i in range(len(winX)):
+        winPercent.append((winY[i] * 100) / gameNumber)
+    print(winPercent)
+
+    plt.scatter(winX, winPercent, marker='.')
+    plt.ylabel('Win Percent')
+    plt.xlabel('Player #')
+    plt.show()
