@@ -40,6 +40,7 @@ if __name__ == '__main__':
     print(winPercent)
 
     plt.scatter(winX, winPercent, marker='.')
+    #plt.ylim([0,100])
     plt.ylabel('Win Percent')
     plt.xlabel('Player #')
     plt.show()
