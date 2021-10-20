@@ -3,8 +3,8 @@ from matplotlib import pyplot as plt
 import collections
 
 playerCount = 5
-tokenCount = 1
-gameNumber = 100000
+tokenCount = 3
+gameNumber = 10000
 
 def winnerDist():
     rawLen = []
@@ -40,6 +40,7 @@ if __name__ == '__main__':
     print(winPercent)
 
     plt.scatter(winX, winPercent, marker='.')
+    #plt.ylim([0,100])
     plt.ylabel('Win Percent')
     plt.xlabel('Player #')
     plt.show()
