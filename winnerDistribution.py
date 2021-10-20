@@ -2,9 +2,9 @@ import gameClass
 from matplotlib import pyplot as plt
 import collections
 
-playerCount = 5
+playerCount = 10
 tokenCount = 1
-gameNumber = 100000
+gameNumber = 1000000
 
 def winnerDist():
     rawLen = []
