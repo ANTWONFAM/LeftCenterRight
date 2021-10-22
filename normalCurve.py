@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 import gameClass
 import winnerDistribution
 import math
+import numpy as np
 
 #polynomial functions with variable R
 def yEst1(R, a, b):
@@ -47,6 +48,14 @@ def probDist():
     plt.plot(x_line, y_line, color='blue', label='normal distribution')
 
     plt.scatter(lenX, lenY, color='green')
+    plt.show()
+
+    cumSum = np.cumsum(y_line)
+    cumSumScatter = np.cumsum(lenY)
+    plt.plot(x_line,cumSum, label='Cum Sum')
+    plt.scatter(lenX, lenY, color='green', marker='.')
+    plt.scatter(lenX, cumSumScatter, marker='.',color='red')
+    plt.legend()
     plt.show()
 
 def testCase():

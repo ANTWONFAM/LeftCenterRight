@@ -4,7 +4,7 @@ import collections
 
 playerCount = 5
 tokenCount = 3
-gameNumber = 100000
+gameNumber = 10000
 
 
 def winnerDist(gameNo = False):
