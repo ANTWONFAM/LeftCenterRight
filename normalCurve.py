@@ -45,9 +45,13 @@ def probDist():
     print(s,m)
     x_line = arange(min(lenX), max(lenX), 1)
     y_line = yEstN(x_line, s, m)
-    plt.plot(x_line, y_line, color='blue', label='normal distribution')
+    plt.plot(x_line, y_line, color='blue', label='Normal Distribution\nσ = %.5f\nμ = %.5f' % (s, m))
 
+
+    plt.ylabel('Percentage of Games')
+    plt.xlabel('Game Length')
     plt.scatter(lenX, lenY, color='green')
+    plt.legend()
     plt.show()
 
     cumSum = np.cumsum(y_line)
