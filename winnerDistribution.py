@@ -3,8 +3,8 @@ from matplotlib import pyplot as plt
 import collections
 
 playerCount = 5
-tokenCount = 3
-gameNumber = 30000
+tokenCount = 1
+gameNumber = 1000000
 
 
 def winnerDist(gameNo = False):
@@ -13,7 +13,7 @@ def winnerDist(gameNo = False):
     rawLen = []
     rawWin = []
     for i in range(gameNumber):
-        if i % 10000 == 0:
+        if i % 1000 == 0:
             print(i)
         tempGame = gameClass.game(playerCount, tokenCount)
         # tempGame.setGameState([1, 1, 1])  # overrides the values above

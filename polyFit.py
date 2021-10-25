@@ -109,14 +109,14 @@ def curveFit():
     x_line = arange(min(winX), max(winX), 0.2)
     y_line = yEst3(x_line, a, b, c, d)
     plt.plot(x_line, y_line, color='green', label='3rd Degree Estimation')
-
-    # least square fit using 6th degree polynomial
-    popt, _ = optimize.curve_fit(yEst6, winX, winY)
-    a, b, c, d, e, f, g = popt
-    print('y = %.5f * x^6 + %.5f * x^5 + %.5f * x^4 + %.5f * x^3 + %.5f * x^2 + %.5f * x + %.5f' % (a, b,c,d,e,f,g))
-    x_line = arange(min(winX), max(winX), 0.2)
-    y_line = yEst6(x_line, a,b,c,d,e,f,g)
-    plt.plot(x_line, y_line, color='red', label='6th Degree Estimation')
+    #
+    # # least square fit using 6th degree polynomial
+    # popt, _ = optimize.curve_fit(yEst6, winX, winY)
+    # a, b, c, d, e, f, g = popt
+    # print('y = %.5f * x^6 + %.5f * x^5 + %.5f * x^4 + %.5f * x^3 + %.5f * x^2 + %.5f * x + %.5f' % (a, b,c,d,e,f,g))
+    # x_line = arange(min(winX), max(winX), 0.2)
+    # y_line = yEst6(x_line, a,b,c,d,e,f,g)
+    # plt.plot(x_line, y_line, color='red', label='6th Degree Estimation')
 
     # scatter plot of data
     plt.scatter(winX, winY, color='green')
