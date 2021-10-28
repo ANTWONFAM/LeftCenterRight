@@ -13,10 +13,10 @@ def winnerDist(gameNo = False):
     rawLen = []
     rawWin = []
     for i in range(gameNumber):
-        if i % 1000 == 0:
+        if i % 10000 == 0:
             print(i)
         tempGame = gameClass.game(playerCount, tokenCount)
-        # tempGame.setGameState([1, 1, 1])  # overrides the values above
+        # tempGame.setGameState([1, 1, 0])  # overrides the values above
         tempData = tempGame.runGame()
         rawWin.append(tempData[3])
         rawLen.append(tempData[0])
