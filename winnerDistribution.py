@@ -2,9 +2,9 @@ import gameClass
 from matplotlib import pyplot as plt
 import collections
 
-playerCount = 5
+playerCount = 40
 tokenCount = 1
-gameNumber = 100000
+gameNumber = 10000000
 
 
 def winnerDist(gameNo = False):
@@ -29,10 +29,6 @@ def winnerDist(gameNo = False):
 
 if __name__ == '__main__':
     lenX, lenY, winX, winY, _, _ = winnerDist()
-    plt.scatter(lenX, lenY, marker='.')
-    plt.xlabel('Number of Turns')
-    plt.ylabel('Amount of Games')
-    plt.show()
 
     print(type(lenX), type(lenY), type(winX), type(winY))
     print(winX)
@@ -42,8 +38,15 @@ if __name__ == '__main__':
         winPercent.append((winY[i] * 100) / gameNumber)
     print(winPercent)
 
-    plt.scatter(winX, winPercent, marker='.')
-    # plt.ylim([0,100])
+    plt.scatter(lenX, lenY, marker='.')
+    plt.xlabel('Number of Turns')
+    plt.ylabel('Amount of Games')
+    plt.show()
+
+    plt.scatter(winX, winPercent, 25, 'red')
+    # plt.ylim([25, 50])
     plt.ylabel('Win Percent')
     plt.xlabel('Player #')
+    plt.xticks([0, 5, 10, 15, 20, 25, 30, 35, 40])
+    plt.grid(True, 'both', 'y')
     plt.show()
