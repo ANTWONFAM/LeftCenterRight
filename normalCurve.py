@@ -28,39 +28,40 @@ def yEstN(R, s, m):
     return first*(2.7**second)
 
 def probDist():
-    lenX, lenY, winX, winY, rawLen, rawWin = winnerDistribution.winnerDist()
-    gameNo = winnerDistribution.winnerDist(gameNo=True)
+    gameNo = 100000
+    for i in range(5):
+        lenX, lenY, winX, winY, rawLen, rawWin = winnerDistribution.winnerDist(pC=i+3,tC=3,gN=gameNo)
+        gameNo = winnerDistribution.winnerDist(gameNo=True)
 
-    lenX.sort()
-    lenY = []
+        lenX.sort()
+        lenY = []
 
-    for i in lenX:
-        lenY.append(rawLen[i]/gameNo)
+        for j in lenX:
+            lenY.append(rawLen[j]/gameNo)
 
-
-
-    # linear regression
-    popt, _ = optimize.curve_fit(yEstN, lenX, lenY, p0=[10,50])
-    s,m = popt
-    print(s,m)
-    x_line = arange(min(lenX), max(lenX), 1)
-    y_line = yEstN(x_line, s, m)
-    plt.plot(x_line, y_line, color='blue', label='Normal Distribution\nσ = %.5f\nμ = %.5f' % (s, m))
+        popt, _ = optimize.curve_fit(yEstN, lenX, lenY, p0=[10,50])
+        s,m = popt
+        print(s,m)
+        x_line = arange(min(lenX), max(lenX), 1)
+        y_line = yEstN(x_line, s, m)
+        plt.plot(x_line, y_line, label='Player Number = '+str(i+3)+'\nσ = %.5f\nμ = %.5f' % (s, m))
 
 
     plt.ylabel('Percentage of Games')
     plt.xlabel('Game Length')
-    plt.scatter(lenX, lenY, color='green')
+    #plt.scatter(lenX, lenY, color='green', marker='.')
     plt.legend()
     plt.show()
 
-    cumSum = np.cumsum(y_line)
-    cumSumScatter = np.cumsum(lenY)
-    plt.plot(x_line,cumSum, label='Cum Sum')
-    plt.scatter(lenX, lenY, color='green', marker='.')
-    plt.scatter(lenX, cumSumScatter, marker='.',color='red')
-    plt.legend()
-    plt.show()
+    # cumSum = np.cumsum(y_line)
+    # cumSumScatter = np.cumsum(lenY)
+    # plt.plot(x_line,cumSum, label='Cumulative Sum')
+    # plt.scatter(lenX, lenY, color='green', marker='.')
+    # plt.scatter(lenX, cumSumScatter, marker='.',color='red')
+    # plt.xlabel("Game Length")
+    # plt.ylabel("Percentage of Games")
+    # plt.legend()
+    # plt.show()
 
 def testCase():
     x_line = arange(0, 350, 1)

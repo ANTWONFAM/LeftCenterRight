@@ -2,14 +2,17 @@ import gameClass
 from matplotlib import pyplot as plt
 import collections
 
-playerCount = 40
-tokenCount = 1
-gameNumber = 10000000
+playerCount = 5
+tokenCount = 3
+gameNumber = 100000
 
 
-def winnerDist(gameNo = False):
+def winnerDist(pC = playerCount, tC = tokenCount, gN = gameNumber, gameNo = False):
     if gameNo is True:
-        return gameNumber
+        return gN
+    playerCount = pC
+    tokenCount = tC
+    gameNumber = gN
     rawLen = []
     rawWin = []
     for i in range(gameNumber):

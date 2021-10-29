@@ -5,9 +5,9 @@ import gameClass
 import math
 import collections
 
-playerCount = 3
-tokenCount = 1
-gameNumber = 1000000
+playerCount = 5
+tokenCount = 3
+gameNumber = 100000
 
 
 #normal distribution
@@ -26,7 +26,7 @@ def playerWinChance():
         if i % 10000 == 0:
             print(i)
         tempGame = gameClass.game(playerCount, tokenCount)
-        tempGame.setGameState([1, 1, 0])  # overrides the values above
+        #tempGame.setGameState([1, 1, 0])  # overrides the values above
         tempData = tempGame.runGame()
         # print (tempData[3],tempData[0])
         playerWinTrack[tempData[3]].append(tempData[0])
@@ -51,11 +51,12 @@ def playerWinChance():
         print(s, m)
         x_line = arange(min(tempX), max(tempX), .1)
         y_line = yEstN(x_line, s, m)
-        plt.plot(x_line, y_line, label='Player '+str(int(i))+' Normal Distribution\nσ = %.5f\nμ = %.5f' % (s, m))
+        plt.plot(x_line, y_line, label='Player '+str(int(i))+'\nσ = %.5f\nμ = %.5f' % (s, m))
         #plt.scatter(tempX, tempY, label='Player ' + str(int(i)))
 
         #plt.scatter(playerWinTrack[i].keys(),playerWinTrack[i].values(),label='Player ' + str(int(i)))
-
+    plt.xlabel('Turn Number')
+    plt.ylabel('Probability Distribution')
     plt.legend()
     plt.show()
 
