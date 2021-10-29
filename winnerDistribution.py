@@ -2,9 +2,9 @@ import gameClass
 from matplotlib import pyplot as plt
 import collections
 
-playerCount = 5
-tokenCount = 3
-gameNumber = 100000
+playerCount = 20
+tokenCount = 1
+gameNumber = 1000000
 
 
 def winnerDist(pC = playerCount, tC = tokenCount, gN = gameNumber, gameNo = False):
